@@ -8,8 +8,8 @@ class PedidoSchema(SCBaseModel):
     id_cliente: int
     data_pedido: datetime
     total: float
-    descricao: str
-    statuspedido: str
+    descricao: Optional[str]
+    statuspedido: Optional[str]
   
     class Config:
         orm_mode = True

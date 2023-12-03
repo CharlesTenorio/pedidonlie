@@ -12,9 +12,4 @@ class PedidoModel(settings.DBBaseModel):
     descricao: str=Column(String(100))
     statuspedido: str = Column(String(30))
     
-
-    # Importe ClienteModel no escopo da função onde você precisar usar
-    # from model.cliente import ClienteModel
-
-   
-
+    

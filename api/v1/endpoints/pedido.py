@@ -40,5 +40,8 @@ async def get_pedidos(db: AsyncSession = Depends(get_session)):
     async with db as session:
         query = select(PedidoModel)
         result = await session.execute(query)
-        pedidos: List[PedidoModel] = result.scalars.all()
+        pedidos: List[PedidoModel] = result.scalars().all()
         return pedidos
+
+
+
