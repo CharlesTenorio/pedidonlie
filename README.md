@@ -1,3 +1,4 @@
+
 # Aplicação Pedido Online
 
 **Aluno:** Paulo Cauã
@@ -27,8 +28,26 @@ Para executar a o posgresql e RabbitMQ e aplicação foi criando um Docekrfile e
 3. Rodar:
    docker-compose build
    docker-compose up 
+   rodar somente o serviço de banco
+    docker-compose up dbpostgres_lojaonline
+
+
+## Banco de Dados
+   Após a inicialização do serviço é necessário criar um banco     de   dados com o nome "db_loja" e estabelecer a conexão. Para isso, proceda da seguinte forma:
+
+Conecte-se ao banco de dados recém-criado.
+
+Localize o arquivo "001_create_db_pgsql.up.sql" na pasta "migrate" e copie o seu conteúdo.
+
+Execute o script SQL copiado para criar as tabelas necessárias.
+
+Este procedimento garantirá a correta configuração do banco de dados, permitindo o adequado funcionamento do sistema. 
+## ATIVAR VIRTUAL ENV
+ .\venv\Scripts\activate
+ 
 ## Acessar os endpoint 
    http://localhost:8000
+
 
 
    

@@ -4,8 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
 from model.pedido import PedidoModel
-from model.pedido import DetalhePedidoModel
-from schemas.pedido_schema import PedidoSchema, DetalhePedidoSchema
+
+from schemas.pedido_schema import PedidoSchema
 from core.deps import get_session
 
 router = APIRouter()
@@ -18,24 +18,17 @@ async def post_pedido(pedido: PedidoSchema, db: AsyncSession = Depends(get_sessi
             novo_pedido = PedidoModel(
                 id_cliente=pedido.id_cliente,
                 data_pedido=pedido.data_pedido,
-                total=pedido.total
+                total=pedido.total,
+                descricao=pedido.descricao,
+                statuspedido=pedido.statuspedido
+                
             )
             session.add(novo_pedido)
             await session.commit()
             await session.refresh(novo_pedido)
 
             # Adicionar detalhes do pedido
-            for detalhe in pedido.detalhes:
-                novo_detalhe = DetalhePedidoModel(
-                    id_pedido=novo_pedido.id,
-                    id_produto=detalhe.id_produto,
-                    quantidade=detalhe.quantidade,
-                    valor=detalhe.valor,
-                    subtotal=detalhe.subtotal
-                )
-                session.add(novo_detalhe)
-
-            await session.commit()
+           
 
             return novo_pedido
 

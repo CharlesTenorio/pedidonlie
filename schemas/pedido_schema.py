@@ -1,9 +1,6 @@
 from typing import Optional, List
 from datetime import datetime
-from pydantic import BaseModel as SCBaseModel # esse as e apra crair um apelido apra o base model pq o p sqlalchimer tem um base model para nao confudir
-from schemas.cliente_schema import ClienteSchema
-from schemas.produto_schema import ProdutoSchema
-
+from pydantic import BaseModel as SCBaseModel
 
 
 class PedidoSchema(SCBaseModel):
@@ -11,22 +8,12 @@ class PedidoSchema(SCBaseModel):
     id_cliente: int
     data_pedido: datetime
     total: float
-    status: str
-    cliente: ClienteSchema
-    detalhes: List["DetalhePedidoSchema"]
-    
+    descricao: str
+    statuspedido: str
+  
     class Config:
         orm_mode = True
 
-class DetalhePedidoSchema(SCBaseModel):
-    id: Optional[int]
-    id_pedido: int
-    id_produto: int
-    quantidade: int
-    valor: float
-    subtotal: float
-    pedido: PedidoSchema
-    produto: ProdutoSchema
-    
-    class Config:
-        orm_mode = True
+# Adicione esta linha para atualizar as referências antes da validação
+
+

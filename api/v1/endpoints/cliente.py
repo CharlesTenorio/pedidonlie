@@ -28,7 +28,7 @@ async def get_clientes(db: AsyncSession=Depends(get_session)):
     async with db as session:
         query = select(ClienteModel)
         result = await session.execute(query)
-        clientes: List[ClienteModel]=result.scalars.all()
+        clientes: List[ClienteModel]= result.scalars().all()
         return clientes
 
 # pega somente um cliente passado o id do cliente
@@ -42,7 +42,7 @@ async def get_cliente(cliente_id: int, db: AsyncSession=Depends(get_session)):
         if cliente:
              return cliente
         else:
-            raise HTTPException(detail='curso não encontrado', 
+            raise HTTPException(detail='cliente não encontrado', 
                                 status_code=status.HTTP_404_NOT_FOUND) 
 
 # atauloiza um cliente pelasso id, e nome 
@@ -58,7 +58,7 @@ async def put_cliente(cliente_id: int, cliente: ClienteSchema, db: AsyncSession=
             return cliente_up
             
         else:
-            raise HTTPException(detail='curso não encontrado', 
+            raise HTTPException(detail='cliente não encontrado', 
                                 status_code=status.HTTP_404_NOT_FOUND) 
 
 # deleta um cliente passado o id do cliente
@@ -75,7 +75,7 @@ async def put_cliente(cliente_id: int,  db: AsyncSession=Depends(get_session)):
             return Response(status_code=status.HTTP_204_NO_CONTENT)
             
         else:
-            raise HTTPException(detail='curso não encontrado', 
+            raise HTTPException(detail='cliente não encontrado', 
                                 status_code=status.HTTP_404_NOT_FOUND) 
 
            

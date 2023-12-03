@@ -17,6 +17,8 @@ CREATE TABLE public.pedidos (
     id_cliente INTEGER REFERENCES clientes(id),
     data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(10, 2),
+    descricao VARCHAR(100)
+    status_pedido VARCHAR(30) 
     FOREIGN KEY (id_cliente) REFERENCES clientes(id)
 );
 
