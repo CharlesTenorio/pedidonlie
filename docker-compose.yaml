@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   
-  dbpostgres_hoodid:
+  dbpostgres_lojaonline:
     image: postgres:15.4-alpine3.18
     container_name: dbpostgres_loja
     # restart: always

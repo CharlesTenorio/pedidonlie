@@ -1,15 +1,14 @@
-from pydantic import BaseSettings
-from sqlalchemy.ext.declarative import declarative_base
+from typing import Generator
 
-class Settings(BaseSettings):
-    """Confirutrações gerais usadas na aplicacao"""
-    """"""
-    API_VERSION: str = '/api/v'
-    DB_URL :str = "postgresql+asyncpg://postgres:adm123@localhost:5432/db_loja"
-    DBBaseModel = declarative_base()
+from sqlalchemy.ext.asyncio import AsyncSession
 
-    class Config:
-        case_sensitive = True
+from core.database import Session
 
-settings = Settings()
 
+async def get_session() -> Generator:
+    session: AsyncSession = Session()
+
+    try:
+        yield session
+    finally:
+        await session.close()
