@@ -31,7 +31,16 @@ services:
       - "15672:15672"
     volumes:
       - ./tmp_data/rabbitmq_data:/var/lib/rabbitmq
-
+  fastapi_app:
+    build:
+      context: .
+    ports:
+     - "8000:8000"
+    depends_on:
+     - dbpostgres_lojaonline
+     - rabbitmq
+    networks:
+     - user-bridge
 networks:
   user-bridge:
     name: user-bridge

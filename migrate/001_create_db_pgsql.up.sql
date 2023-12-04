@@ -13,15 +13,15 @@ CREATE TABLE public.produtos (
 
 -- Criação da tabela 'pedidos'
 CREATE TABLE public.pedidos (
-    id SERIAL PRIMARY KEY,
-    id_cliente INTEGER REFERENCES clientes(id),
-    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    total DECIMAL(10, 2),
-    descricao VARCHAR(100)
-    status_pedido VARCHAR(30) 
-    FOREIGN KEY (id_cliente) REFERENCES clientes(id)
+    id serial4 NOT NULL,
+    id_cliente int4 NULL,
+    data_pedido timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+    total numeric(10, 2) NULL,
+    descricao varchar(100) NULL,
+    statuspedido varchar(30) NULL,
+    produtos jsonb NULL,  -- Adicionando um campo do tipo JSON
+    CONSTRAINT pedidos_pkey PRIMARY KEY (id)
 );
-
 -- Criação da tabela 'detalhes_pedidos'
 CREATE TABLE public.detalhes_pedidos (
     id SERIAL PRIMARY KEY,

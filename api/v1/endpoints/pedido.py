@@ -20,21 +20,21 @@ async def post_pedido(pedido: PedidoSchema, db: AsyncSession = Depends(get_sessi
                 data_pedido=pedido.data_pedido,
                 total=pedido.total,
                 descricao=pedido.descricao,
-                statuspedido=pedido.statuspedido
-                
+                statuspedido=pedido.statuspedido,
+                produtos=pedido.produtos  # Corrigido aqui                               
             )
             session.add(novo_pedido)
             await session.commit()
             await session.refresh(novo_pedido)
 
             # Adicionar detalhes do pedido
-           
 
             return novo_pedido
 
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
-
+    
+    
 @router.get('/', response_model=List[PedidoSchema])
 async def get_pedidos(db: AsyncSession = Depends(get_session)):
     async with db as session:

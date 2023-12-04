@@ -11,7 +11,7 @@ async def read_and_save_from_queue(db: AsyncSession):
     channel = connection.channel()
 
     # Declarar a fila (substitua 'minha_fila' pelo nome desejado)
-    channel.queue_declare(queue='minha_fila')
+    channel.queue_declare(queue='pagamento_fila')
 
     def callback(ch, method, properties, body):
         data = eval(body.decode())  # Certifique-se de que a serialização/deserialização está correta
