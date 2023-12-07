@@ -15,4 +15,19 @@ class PagamentodoModel(settings.DBBaseModel):
     total_pago: float = Column(DECIMAL(precision=10, scale=2))
     status : str = Column(String(50))
 
+
+def create_payment(session, db, id_pedido, total_pago, status):
+    payment = PagamentodoModel(id_pedido=id_pedido, total_pago=total_pago, status=status)
+    session.add(payment)
+    session.commit()
+    session.refresh(payment)
+    return payment
+
+# Função para listar pagamentos
+def list_payments(session, db, id_pedido=0):
+    if id_pedido:
+        return session.query(PagamentodoModel).filter_by(id_pedido=id_pedido).all()
+    else:
+        return session.query(PagamentodoModel).all()
+
    

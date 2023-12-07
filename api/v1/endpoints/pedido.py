@@ -1,7 +1,9 @@
+import datetime
 from typing import List
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from core.configs import Settings
 
 from model.pedido import PedidoModel
 
@@ -20,13 +22,24 @@ async def post_pedido(pedido: PedidoSchema, db: AsyncSession = Depends(get_sessi
                 data_pedido=pedido.data_pedido,
                 total=pedido.total,
                 descricao=pedido.descricao,
-                statuspedido=pedido.statuspedido,
-                produtos=pedido.produtos  # Corrigido aqui                               
+                statuspedido=pedido.statuspedido
+                                       
             )
             session.add(novo_pedido)
             await session.commit()
             await session.refresh(novo_pedido)
+            
+            # Enviar dados para a fila RabbitMQ
+            message_dict = {
+                'id_pedido': novo_pedido.id,
+                'data_pagamento': novo_pedido.data_pedido.isoformat(),  # ou use novo_pedido.data_pagamento se estiver definido
+                'total_pago': float(novo_pedido.total) if novo_pedido.total is not None else None,
+                'status': "em processamento"
+            }
+            settings_instance = Settings()
+            settings_instance.send_message_to_queue(message_dict)
 
+            
             # Adicionar detalhes do pedido
 
             return novo_pedido

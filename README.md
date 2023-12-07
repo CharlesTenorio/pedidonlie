@@ -46,6 +46,9 @@ Execute o script SQL copiado para criar as tabelas necessárias.
 
 Este procedimento garantirá a correta configuração do banco de dados, permitindo o adequado funcionamento do sistema. 
 
+## RabbitMQ 
+  criar uma fila chamada pagamento
+
 ## Instando o ambiente virutal do Python
    1) instala o python 
    2) depois entra no diretorio do projeto e na raiz

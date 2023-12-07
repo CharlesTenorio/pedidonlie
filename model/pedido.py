@@ -1,6 +1,6 @@
 from core.configs import settings
-from sqlalchemy import Column, Integer, String, DECIMAL, DateTime, ForeignKey
-from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy import Column, Integer, String, DECIMAL, DateTime, ForeignKey, JSON
+
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
@@ -12,4 +12,4 @@ class PedidoModel(settings.DBBaseModel):
     total: float = Column(DECIMAL(precision=10, scale=2))
     descricao: str=Column(String(100))
     statuspedido: str = Column(String(30))
-    produtos: JSONB
+    

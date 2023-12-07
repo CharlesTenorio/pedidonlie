@@ -33,3 +33,13 @@ CREATE TABLE public.detalhes_pedidos (
     FOREIGN KEY (id_pedido) REFERENCES pedidos(id),
     FOREIGN KEY (id_produto) REFERENCES produtos(id)
 );
+
+
+CREATE TABLE pagamento (
+    id SERIAL PRIMARY KEY,
+    id_pedido INTEGER REFERENCES pedidos(id),
+    data_pagamento TIMESTAMP DEFAULT current_timestamp,
+    total_pago DECIMAL(10, 2),
+    status VARCHAR(50),
+     FOREIGN KEY (id_pedido) REFERENCES pedidos(id)
+);
