@@ -106,6 +106,40 @@
 			"response": []
 		},
 		{
+			"name": "processar-pagamento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_cliente\": 1,\r\n    \"data_pedido\": \"2023-12-03T12:34:56\",\r\n    \"total\": 5000.0,\r\n    \"descricao\": \"Descrição do pedido\",\r\n    \"statuspedido\": \"Em andamento\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/pagamentos/processar-pagamento",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"pagamentos",
+						"processar-pagamento"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "lista_clientes",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
