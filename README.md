@@ -68,8 +68,18 @@ Este procedimento garantirá a correta configuração do banco de dados, permiti
   
 
  
-## Acessar os endpoint 
-   http://localhost:8000
+## Acessar os endpoint vai Postaman
+   
+Abra o Postman no canto superior esquerdo, clique no botão "Import" (Importar).
+
+Escolha a opção "File" (Arquivo).
+
+Selecione o arquivo do script que você deseja importar.
+
+Após selecionar o arquivo, clique no botão "Open" (Abrir) para importar o script para o Postman.
+
+Depois de concluir essas etapas, o script será adicionado ao seu espaço de trabalho no Postman. Você poderá ver a coleção ou solicitação correspondente com o script importado.
+http://localhost:8000
 
 
 
