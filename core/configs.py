@@ -51,9 +51,19 @@ class Settings(BaseSettings):
 
             method_frame, header_frame, body = channel.basic_get(queue=self.RABBITMQ_QUEUE)
             if method_frame:
-                message_dict = json.loads(body.decode('utf-8'))
-                # Aqui você pode processar a mensagem conforme necessário
-                return message_dict
+                try:
+                    message_dict = json.loads(body.decode('utf-8'))
+                  
+
+                    # Confirma que a mensagem foi processada com sucesso e pode ser removida da fila
+                    channel.basic_ack(delivery_tag=method_frame.delivery_tag)
+
+                    return message_dict
+                except Exception as e:
+                    #
+                    print(f"Erro durante o processamento da mensagem: {e}")
+                    
+                    return None
             else:
                 return None
 

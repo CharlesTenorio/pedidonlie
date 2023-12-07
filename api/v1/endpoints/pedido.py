@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from typing import List
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -30,9 +30,10 @@ async def post_pedido(pedido: PedidoSchema, db: AsyncSession = Depends(get_sessi
             await session.refresh(novo_pedido)
             
             # Enviar dados para a fila RabbitMQ
+            data_hora_atual = datetime.now()
             message_dict = {
                 'id_pedido': novo_pedido.id,
-                'data_pagamento': novo_pedido.data_pedido.isoformat(),  # ou use novo_pedido.data_pagamento se estiver definido
+                'data_pagamento': data_hora_atual.isoformat(),  # ou use novo_pedido.data_pagamento se estiver definido
                 'total_pago': float(novo_pedido.total) if novo_pedido.total is not None else None,
                 'status': "em processamento"
             }
